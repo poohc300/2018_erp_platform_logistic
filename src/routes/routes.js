@@ -1,7 +1,6 @@
 import DashboardLayout from '@/pages/Layout/DashboardLayout.vue'
 import Home from '@/pages/Home.vue'
 import Maps from '@/pages/Maps.vue'
-import Notifications from '@/pages/Notifications.vue'
 import EditProfileForm from '@/pages/UserProfile/EditProfileForm.vue'
 import DetailDelivery from '@/pages/DetailDelivery.vue'
 
@@ -33,11 +32,6 @@ const routes = [
           hideFooter: true
         },
         component: Maps
-      },
-      {
-        path: 'notifications',
-        name: 'Notifications',
-        component: Notifications
       }
     ]
   }

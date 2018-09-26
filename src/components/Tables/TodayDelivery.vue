@@ -4,20 +4,18 @@
       </ul>
       
       <md-table  v-model="items" v-for="(item, itemIdx) in items" :key='itemIdx' id= "dataIdx">
-        <md-table-row slot="md-table-row" slot-scope="{ items }" md-auto-select v-on:click="detail(item.ID)">
+        <md-table-row slot="md-table-row" slot-scope="{ items }" md-auto-select v-on:click="detail(item.id)">
           <md-table-cell>
-            <span> {{item.ID}}</span>
+            <span> {{item.id}}</span>
             <br>
-            <span> {{item.customerBName}}</span>
+            <span> {{item.amount}}  {{ item.payment }}</span>
             <br>
-            <span> {{ item.address }}</span>
+            <span> {{ item.itemcount }}</span>
             <br>
-            <span> {{item.OrderDate}}</span>
-            <br>
-            <span> {{item.amount}}</span>
+            <span> {{ item.address1 }} {{item.address2}}</span>
           </md-table-cell>
           <md-table-cell>
-            <span> {{item.OrderState}}</span>
+            <span> {{item.orderstate}}</span>
             <br>
           </md-table-cell> 
         </md-table-row>
@@ -46,9 +44,10 @@ export default {
       this.$router.push('/home/detail-delivery/'+id)
     }
   },
+    //http://freshntech.cafe24.com/order/getDelivererOrder/KRBS000001?condition=7
    //fetched when component is created
     mounted: function() {
-         this.$http.get("http://192.168.64.131:8080/app/order/getDelivererOrder/KRBS000001?condition=7")
+         this.$http.get("http://freshntech.cafe24.com/order/getOrder/KRBS000001?condition=7")
           .then( response=>{
 
               
@@ -56,13 +55,25 @@ export default {
           
           this.items = response.data
           for(var i=0;i<response.data.length;i++){
-            this.items[i].customerBName = response.data[i].customerBName
-            this.items[i].ID = response.data[i].ID
-            this.items[i].OrderDate = response.data[i].OrderDate
-            this.items[i].address = response.data[i].Address1 + response.data[i].Address2
+            this.items[i].id = response.data[i].id
+            this.items[i].tbcustomer_id = response.data[i].tbcustomer_id
+            this.items[i].itemcount = response.data[i].itemcount
             this.items[i].amount = response.data[i].amount
-            this.items[i].OrderState = response.data[i].OrderState
-             
+            this.items[i].points = response.data[i].points
+            this.items[i].payment = response.data[i].payment
+            this.items[i].payMethod = response.data[i].payMethod
+            this.items[i].tbdeliverer_id = response.data[i].tbdeliverer_id
+            this.items[i].salespersonid = response.data[i].salespersonid
+            this.items[i].orderstate = response.data[i].orderstate
+            this.items[i].updatedate = response.data[i].updatedate
+            this.items[i].address1 = response.data[i].address1
+            this.items[i].address2 = response.data[i].address2
+            this.items[i].address3 = response.data[i].address3
+            this.items[i].memo = response.data[i].memo
+            this.items[i].remark1 = response.data[i].remark1
+            this.items[i].remark2 = response.data[i].remark2
+            this.items[i].regdate = response.data[i].regdate
+            console.log(response.data)
           }
           
           console.log(this.items)
@@ -71,12 +82,12 @@ export default {
       // //json에서 주소 받아오기
       // var addressData = getAddressData()
        
-        var baseUrl = 'http://192.168.64.131:8080/app'
+        var baseUrl = 'http://freshntech.cafe24.com'
         var getDeliveryOrder = "/order/getDelivererOrder/KRBS00001?condition={0}"
         var addressList = []
         var id = "01053530001"
         var password = "1234"
-        var loginUrl = "http://192.168.64.131:8080/app/deliverer/login"
+        var loginUrl = "http://freshntech.cafe24.com/deliverer/login"
         var basicAuth = 'Basic ' + btoa(id + ':' + password)
        
        axios.post(loginUrl, {}, {

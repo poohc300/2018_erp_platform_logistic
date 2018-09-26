@@ -52,12 +52,12 @@ export default {
   },
   methods: {
     getData: function() {
-      var baseUrl ='http://192.168.64.131:8080/'
-      axios.get('https://jsonplaceholder.typicode.com/users')
+      var baseUrl ='http://freshntech.cafe24.com'
+      axios.get('http://freshntech.cafe24.com/order')
       .then(response => {
         this.items = response.data
         console.log("데이터:")
-        console.log(this.items)
+        console.log(this.items[2])
       })
       .catch(e =>{
         this.errors.push(e)

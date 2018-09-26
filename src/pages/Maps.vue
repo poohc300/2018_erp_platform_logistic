@@ -45,12 +45,12 @@ export default {
       // //json에서 주소 받아오기
       // var addressData = getAddressData()
        
-        var baseUrl = 'http://192.168.64.131:8080/app'
+        var baseUrl = 'http://freshntech.cafe24.com'
         var getDeliveryOrder = "/order/getDelivererOrder/KRBS00001?condition={0}"
         var addressList = []
         var id = "01053530001"
         var password = "1234"
-        var loginUrl = "http://192.168.64.131:8080/app/deliverer/login"
+        var loginUrl = baseUrl+"/deliverer/login"
         var basicAuth = 'Basic ' + btoa(id + ':' + password)
        
        axios.post(loginUrl, {}, {
@@ -513,17 +513,15 @@ export default {
 
   mounted(){
     // this.getAddressData()
-    this.$http.get("http://192.168.64.131:8080/app/order/getDelivererOrder/KRBS000001?condition=7")
+    this.$http.get("http://freshntech.cafe24.com/order/getOrder/KRBS000001?condition=7")
           .then( response=>{
-
-              
-          console.log("디비에서 데이터 가져오기")
-          
+          console.log("지도에 그릴 배송 데이터정보 받아오기")
           this.posts = response.data
+          console.log(this.posts)
           for(var i=0;i<response.data.length;i++){
-            this.posts[i].address = response.data[i].Address1 + response.data[i].Address2
+            this.posts[i].address = response.data[i].address1 + response.data[i].address2
           }
-            
+          console.log(this.posts.address)
           var map = new Tmap.Map({
           
               div: 'map',
@@ -540,12 +538,12 @@ export default {
       // //json에서 주소 받아오기
       // var addressData = getAddressData()
        
-        var baseUrl = 'http://192.168.64.131:8080/app'
+        var baseUrl = 'http://freshntech.cafe24.com/'
         var getDeliveryOrder = "/order/getDelivererOrder/KRBS00001?condition={0}"
         var addressList = []
         var id = "01053530001"
         var password = "1234"
-        var loginUrl = "http://192.168.64.131:8080/app/deliverer/login"
+        var loginUrl = baseUrl+"/deliverer/login"
         var basicAuth = 'Basic ' + btoa(id + ':' + password)
        
        axios.post(loginUrl, {}, {

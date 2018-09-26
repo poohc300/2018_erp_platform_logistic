@@ -2,20 +2,19 @@
   <div>
     <md-table v-model="items" md-card @md-selected="onSelect" v-for="(item, itemIdx) in items" :key='itemIdx' id= "dataIdx">
 
-      <md-table-row slot="md-table-row" slot-scope="{ items }" md-selectable="multiple" md-auto-select>
-        <md-table-cell>
-        <span>{{item.orderitem.id}}
-        {{item.orderitem.qty}} 개 
-        {{ item.orderitem.amount }} 원<br>
-        정보: {{item.item.unit}}<br>
-        원산지: {{item.item.origin}}<br>
-        주소<br>
-        보류메모: {{item.item.memo}}<br><br>
-        </span></md-table-cell>
-      </md-table-row>
+      <md-table-row slot="md-table-row" slot-scope="{ item }" md-selectable="multiple" md-auto-select> 
+        <md-table-cell md-label="날짜" md-sort-by="date">{{item.orderitem.updateDate}}</md-table-cell>
+        <md-table-cell md-label="품명" md-sort-by="name"> {{item.orderitem.tbItem_Id}}</md-table-cell>
+        <md-table-cell md-label="수량" md-sort-by="qty">{{item.orderitem.qty}}</md-table-cell>
+        <md-table-cell md-label="상태" md-sort-by="state">{{item.orderitem.state}}</md-table-cell>
+        <md-table-cell md-label="가격" md-sort-by="amount">{{item.orderitem.amount}}</md-table-cell>
+        <md-table-cell md-label="비고" md-sort-by="memo">{{item.item.memo}}</md-table-cell>
+      </md-table-row> 
     </md-table>
-    총주문수량<br>
-    총주문금액<br><br><br>
+    
+      <strong>선택된 아이템:</strong>
+      {{selected}} <br>
+   
     <button v-on:click="refund">반품신청</button>
     <button v-on:click="finished">배송완료</button>
     <modal v-if="showModal" @close="showModal = false">
@@ -42,6 +41,7 @@ export default {
     return {
       user:0,
       selected: [],
+      checkedItem: [],
       errors: [],
       items: [
         
@@ -55,14 +55,24 @@ export default {
   },
   methods: {
     refund: function(){
-      if(this.showModal == false){
-        this.showModal = true
-      }
+      console.log(this.selected)
+      this.$http.post("http://freshntech.cafe24.com/orderdetail/")
+        .then( response =>{
+          console.log("반품요청")
+          
+        })
     },
     finished: function(){
-       if(this.showModal == false){
-        this.showModal = true
-      }
+        console.log(this.selected)
+      this.$http.post("http://freshntech.cafe24.com/orderdetail/")
+        .then( response =>{
+          console.log("배송완료요청")
+          
+        })
+    },
+    onSelect: function(event){ 
+      this.selected = event
+      console.log(event)
     }
   },
    //fetched when component is created
@@ -71,7 +81,7 @@ export default {
     },
 
     mounted: function(){
-        this.$http.get("http://192.168.64.131:8080/app/orderdetail/"+this.$route.params.id)
+        this.$http.get("http://freshntech.cafe24.com/orderdetail/"+this.$route.params.id)
           .then( response=>{
 
                          
@@ -91,12 +101,12 @@ export default {
       // //json에서 주소 받아오기
       // var addressData = getAddressData()
        
-        var baseUrl = 'http://192.168.64.131:8080/app'
+        var baseUrl = 'http://freshntech.cafe24.com'
         var getDeliveryOrder = "/order/getDelivererOrder/KRBS00001?condition={0}"
         var addressList = []
         var id = "01053530001"
         var password = "1234"
-        var loginUrl = "http://192.168.64.131:8080/app/deliverer/login"
+        var loginUrl = "http://freshntech.cafe24.com/deliverer/login"
         var basicAuth = 'Basic ' + btoa(id + ':' + password)
        
        axios.post(loginUrl, {}, {
