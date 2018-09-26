@@ -55,16 +55,18 @@ export default {
   },
   methods: {
     refund: function(){
-      console.log(this.selected)
-      this.$http.post("http://freshntech.cafe24.com/orderdetail/")
+      console.log("반품버튼누르면")
+      console.log(this.selected[0].orderitem.id)
+      this.$http.post("http://freshntech.cafe24.com/orderdetail/"+this.selected[0].orderitem.id)
         .then( response =>{
           console.log("반품요청")
           
         })
     },
     finished: function(){
-        console.log(this.selected)
-      this.$http.post("http://freshntech.cafe24.com/orderdetail/")
+      console.log("배송완료버튼누르면")
+      console.log(this.selected[0].orderitem.id)
+      this.$http.post("http://freshntech.cafe24.com/orderdetail/"+this.selected[0].orderitem.id)
         .then( response =>{
           console.log("배송완료요청")
           
