@@ -49,7 +49,7 @@ export default {
    //fetched when component is created
     mounted: function() {
       
-      // this.getData(),
+     
          this.$http.get("http://freshntech.cafe24.com/order/getDelivererRefund/KRBS000001?condition=7")
           .then( response=>{
 
