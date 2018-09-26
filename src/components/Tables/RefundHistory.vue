@@ -36,10 +36,7 @@ export default {
       user:0,
       selected: [],
       errors: [],
-      items: [
-        
-      
-            
+      items: [  
       ]
     }
   },
@@ -48,14 +45,9 @@ export default {
   },
    //fetched when component is created
     mounted: function() {
-      
-     
          this.$http.get("http://freshntech.cafe24.com/order/getDelivererRefund/KRBS000001?condition=7")
           .then( response=>{
-
-              
           console.log("반품내역정보 가져오기")
-          
           this.items = response.data
           for(var i=0;i<response.data.length;i++){
             this.items[i].tbCustom_ID = response.data[i].tbCustom_ID
@@ -79,12 +71,8 @@ export default {
             this.items[i].SalesPersonID = response.data[i].SalesPersonID 
             this.items[i].Memo = response.data[i].Memo 
             this.items[i].customerBName = response.data[i].customerBName 
-            
           }
-          
           console.log(this.items)
-        
-
       // //json에서 주소 받아오기
       // var addressData = getAddressData()
        
