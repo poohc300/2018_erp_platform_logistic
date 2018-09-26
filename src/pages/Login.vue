@@ -12,7 +12,7 @@
       <label>비밀번호</label>
       <md-input v-model="password"></md-input>
       </md-field>
-      <md-button class="md-primary" @click="onSubmit">로그인</md-button>
+      <md-button class="md-success" @click="onSubmit">로그인</md-button>
     </div>
     
   </div>

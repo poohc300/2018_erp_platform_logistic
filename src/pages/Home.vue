@@ -1,18 +1,10 @@
 <template>
   <div class="content">
     <div class="md-layout">
-      <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33">
-        <nav-tabs-card>
-          <template slot="content">
-            <h4 class="title">LOGO</h4>
-             
-          </template>
-        </nav-tabs-card>
-      </div>
       <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-50">
         <nav-tabs-card>
           <template slot="content">
-            <md-tabs md-sync-route class="md-warning" md-alignment="centered" >
+            <md-tabs md-sync-route class="md-success" md-alignment="centered" >
               <md-tab id="tab-today" md-label="당일배송">
                 <TodayDelivery/>
               </md-tab>

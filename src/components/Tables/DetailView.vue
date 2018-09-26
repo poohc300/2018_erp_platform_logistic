@@ -14,9 +14,10 @@
     
       <strong>선택된 아이템:</strong>
       {{selected}} <br>
-   
-    <button v-on:click="refund">반품신청</button>
-    <button v-on:click="finished">배송완료</button>
+    <md-table class="button">
+    <md-button class="md-raised md-success" v-on:click="refund" md-alignment="centered" >반품신청</md-button>
+    <md-button class="md-raised md-success" v-on:click="finished" md-alignment="centered">배송완료</md-button>
+    </md-table>
     <modal v-if="showModal" @close="showModal = false">
     <!--
       you can use custom content here to overwrite
@@ -134,5 +135,8 @@ export default {
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+  }
+  .button {
+    color: #2c3e50;
   }
 </style>

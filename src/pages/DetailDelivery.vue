@@ -4,8 +4,11 @@
       <div class="md-layout-item md-medium-size-100 md-xsmall-size-100 md-size-33">
         <nav-tabs-card>
           <template slot="content">
-            <h4 class="title">LOGO</h4>
-             
+             <div class="md-autocomplete">
+            <md-autocomplete class="search" v-model="selectedEmployee" :md-options="employees">
+              <label>Search...</label>
+            </md-autocomplete>
+          </div>
           </template>
         </nav-tabs-card>
       </div>
