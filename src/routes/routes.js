@@ -3,8 +3,13 @@ import Home from '@/pages/Home.vue'
 import Maps from '@/pages/Maps.vue'
 import EditProfileForm from '@/pages/UserProfile/EditProfileForm.vue'
 import DetailDelivery from '@/pages/DetailDelivery.vue'
+import Login from '@/pages/Login.vue'
 
 const routes = [
+  {
+    path: '/login',
+    component: Login
+  },
   {
     path: '/',
     component: DashboardLayout,
