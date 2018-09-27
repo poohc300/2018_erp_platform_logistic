@@ -33,7 +33,10 @@ export default {
   name: 'DeliveryHistory',
   data () {
     return {
-      user:0,
+      user:{
+        "userid":"",
+        "userpw":""
+      },
       selected: [],
       errors: [],
       items: [

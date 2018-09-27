@@ -33,7 +33,10 @@ export default {
   name: 'RefundHistory',
   data () {
     return {
-      user:0,
+      user:{
+        "userid":"",
+        "userpw":""
+      },
       selected: [],
       errors: [],
       items: [  
@@ -83,15 +86,15 @@ export default {
         var password = "1234"
         var loginUrl = "http://freshntech.cafe24.com/deliverer/login"
         var basicAuth = 'Basic ' + btoa(id + ':' + password)
-       
-       axios.post(loginUrl, {}, {
-          headers: { 'Authorization': + basicAuth }
-        }).then(function(response) {
+        this.user.userid = id
+        this.user.userpw = password
+       axios.post(loginUrl, this.user)
+        .then(function(response) {
           console.log('Authenticated');
+          console.log(response)
         }).catch(function(error) {
           console.log('Error on Authentication');
       })
-
       
     }
    )}
