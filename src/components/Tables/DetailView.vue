@@ -42,7 +42,16 @@ export default {
     return {
       user:0,
       selected: [],
-      checkedItem: [],
+      checkedItem: {
+        "orderItemList":[
+          {
+            "orderItemId":"",
+            "orderItemState": ""
+          }
+        ],
+        "orderId" :"",
+        "orderState" : ""
+      },
       errors: [],
       items: [
         
@@ -58,20 +67,34 @@ export default {
     refund: function(){
       console.log("반품버튼누르면")
       console.log(this.selected[0].orderitem.id)
-      this.$http.post("http://freshntech.cafe24.com/orderdetail/"+this.selected[0].orderitem.id)
-        .then( response =>{
-          console.log("반품요청")
-          
-        })
+      this.checkedItem.orderItemList.orderItemId = this.selected[0].orderitem.id
+      this.checkedItem.orderItemList.orderItemState = "반품접수"
+      this.checkedItem.orderId = this.selected[0].orderitem.id
+      this.checkedItem.orderState = "반품접수"
+      console.log(this.checkedItem)
+
+      axios.put("http://freshntech.cafe24.com/orderdetail/", this.checkedItem
+        ).then(function(response) {
+          console.log('반품접수');
+        }).catch(function(error) {
+          console.log('Error');
+      })
     },
     finished: function(){
       console.log("배송완료버튼누르면")
       console.log(this.selected[0].orderitem.id)
-      this.$http.post("http://freshntech.cafe24.com/orderdetail/"+this.selected[0].orderitem.id)
-        .then( response =>{
-          console.log("배송완료요청")
-          
-        })
+      this.checkedItem.orderItemList.orderItemId = this.selected[0].orderitem.id
+      this.checkedItem.orderItemList.orderItemState = "배송완료"
+      this.checkedItem.orderId = this.selected[0].orderitem.id
+      this.checkedItem.orderState = "배송완료"
+      console.log(this.checkedItem)
+
+      axios.put("http://freshntech.cafe24.com/orderdetail/", this.checkedItem
+        ).then(function(response) {
+          console.log('배송완료접수');
+        }).catch(function(error) {
+          console.log('Error');
+      })
     },
     onSelect: function(event){ 
       this.selected = event
